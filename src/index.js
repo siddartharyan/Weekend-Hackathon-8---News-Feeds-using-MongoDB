@@ -18,7 +18,7 @@ const getAns = (data, limit, offset) => {
     return arr;
 }
 app.get('/newsFeeds', (req, res) => {
-    News.find({}).then((result) => res.json(getAns(result, 10, 0)))
+    res.status(200).json({});
 })
 
 app.get('/newsFeeds/:limit/:offset', (req, res) => {
