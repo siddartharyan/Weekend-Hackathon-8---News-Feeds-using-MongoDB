@@ -12,13 +12,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 const getAns = (data, limit, offset) => {
     let arr = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = offset; i < offset + limit; i++) {
         arr.push(data[i]);
     }
     return arr;
 }
 app.get('/newsFeeds', (req, res) => {
-    res.status(200).json({});
+    News.find({}).then((data) => res.status(getAns(data, 10, 0)))
 })
 
 app.get('/newsFeeds/:limit/:offset', (req, res) => {
