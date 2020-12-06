@@ -12,8 +12,8 @@ const News = newsArticleModel;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.get('/newsFeeds', (req, res) => {
-    const limit = (isNaN(limit) || Number(limit) >= len) ? 10 : Number(limit);
-    const offset = (isNaN(offset) || Number(offset) >= len) ? 0 : Number(offset);
+    const limit = (isNaN(req.query.limit) || Number(req.query.limit) >= len) ? 10 : Number(req.query.limit);
+    const offset = (isNaN(req.query.offset) || Number(req.query.offset) >= len) ? 0 : Number(req.query.offset);
     News.find({}).skip(offset).limit(limit).then((result) => res.json(result)).then((err) => res.status(400).json(err))
 })
 app.listen(port, () => console.log(`App listening on port ${port}!`))
